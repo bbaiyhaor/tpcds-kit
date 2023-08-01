@@ -217,20 +217,18 @@ mk_detail(void *row, int bPrint)
 	/** 
 	* having gone to the trouble to make the sale, now let's see if it gets returned
 	*/
-    if (!is_set_filter() || is_set_child()) {
-        genrand_integer(&nTemp, DIST_UNIFORM, 0, 99, 0, CR_IS_RETURNED);
-        if (nTemp < CR_RETURN_PCT)
-        {
-            mk_w_catalog_returns(NULL, 1);
-          if (bPrint)
-             pr_w_catalog_returns(NULL);
-        }
-    }
+	genrand_integer(&nTemp, DIST_UNIFORM, 0, 99, 0, CR_IS_RETURNED);
+	if (nTemp < CR_RETURN_PCT)
+	{
+		mk_w_catalog_returns(NULL, 1);
+      if (bPrint)
+         pr_w_catalog_returns(NULL);
+	}
 
    /**
    * now we print out the order and lineitem together as a single row
    */
-   if (bPrint && (!is_set_filter() || !is_set_child()))
+   if (bPrint)
       pr_w_catalog_sales(NULL);
 
    return;
